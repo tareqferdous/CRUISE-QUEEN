@@ -66,8 +66,8 @@
                     <p class="warning">*Maximum 4 seats can be issued</p>
                 </div>
                 <div class="plus-minus-btn">
-                    <button onclick="handleFirstClassSeats('firstClass',true)"  class="btn btn-default"><i class="fas fa-plus"></i></button>
-                    <button onclick="handleFirstClassSeats('firstClass',false)"  class="btn btn-default"><i class="fas fa-minus"></i></button>
+                    <button onclick="handleCruiseSeats('firstClass',true)"  class="btn btn-default"><i class="fas fa-plus"></i></button>
+                    <button onclick="handleCruiseSeats('firstClass',false)"  class="btn btn-default"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             <!-- Ecomony Ticket Booking -->
@@ -78,8 +78,8 @@
                     <p class="warning">*Maximum 4 seats can be issued</p>
                 </div>
                 <div class="plus-minus-btn">
-                    <button onclick="handleFirstClassSeats('economy',true)"  class="btn btn-default"><i class="fas fa-plus"></i></button>
-                    <button onclick="handleFirstClassSeats('economy',false)"  class="btn btn-default"><i class="fas fa-minus"></i></button>
+                    <button onclick="handleCruiseSeats('economy',true)"  class="btn btn-default"><i class="fas fa-plus"></i></button>
+                    <button onclick="handleCruiseSeats('economy',false)"  class="btn btn-default"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             <!-- Calculation Part -->
@@ -123,7 +123,7 @@
     <!--Thank You-->
 
     <script>
-        function handleFirstClassSeats(ticket, isIncrease){
+        function handleCruiseSeats(ticket, isIncrease){
             const cruiseTicketsInput = document.getElementById(ticket+'-count');
             const cruiseTicketsCount = parseInt(cruiseTicketsInput.value);
 
