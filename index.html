@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curise Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Cdn link -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"/>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content container">
+
+        <div class="booking-content">
+            <h1>Cruise Queen</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book./p>
+        </div>
+
+        <div class="booking-form">
+            <h3>Book Ocean Time</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <!-- First Class Ticket Booking -->
+            <div class="input-group f-class">
+                <div>
+                    <label for="">First Class <span id="firstClass-total">($150)</span></label>
+                    <input id="firstClass-count" class="inp-style inp-width empty-form" type="number" name="" value="0">
+                    <p class="warning">*Maximum 4 seats can be issued</p>
+                </div>
+                <div class="plus-minus-btn">
+                    <button onclick="handleFirstClassSeats('firstClass',true)"  class="btn btn-default"><i class="fas fa-plus"></i></button>
+                    <button onclick="handleFirstClassSeats('firstClass',false)"  class="btn btn-default"><i class="fas fa-minus"></i></button>
+                </div>
+            </div>
+            <!-- Ecomony Ticket Booking -->
+            <div class="input-group f-class">
+                <div>
+                    <label for="">Economy <span id="economy-total">($100)</span></label>
+                    <input id="economy-count" class="inp-style inp-width empty-form" type="number" name="" value="0">
+                    <p class="warning">*Maximum 4 seats can be issued</p>
+                </div>
+                <div class="plus-minus-btn">
+                    <button onclick="handleFirstClassSeats('economy',true)"  class="btn btn-default"><i class="fas fa-plus"></i></button>
+                    <button onclick="handleFirstClassSeats('economy',false)"  class="btn btn-default"><i class="fas fa-minus"></i></button>
+                </div>
+            </div>
+            <!-- Calculation Part -->
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="sub-total">00</span></p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="tax-amount">00</span></p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="grand-total">00</span></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Book Now Button -->
+            <button id="submitBtn" class="btn-style">Book Now</button>
+            <!-- User Notify -->
+            <div class="notify-section">
+                <p id="success" class="notify"> <span id="right">✅</span>Congratulations! Your Cruise Booking Is Confirmed </p>
+            </div>
+        </div>
+    </main>
+
+    <!--Thank You-->
+
+    <script>
+        function handleFirstClassSeats(ticket, isIncrease){
+            const cruiseTicketsInput = document.getElementById(ticket+'-count');
+            const cruiseTicketsCount = parseInt(cruiseTicketsInput.value);
+
+            let cruiseTicketsNewCount = cruiseTicketsCount;
+            if(isIncrease == true){
+                if( cruiseTicketsCount >= 4){
+                alert('Maximum 4 Seats Can Be Issued At A Time');
+                }
+                else{
+                    cruiseTicketsNewCount = cruiseTicketsCount + 1;
+                }             
+            }
+            else if(isIncrease == false && cruiseTicketsCount > 0){
+                cruiseTicketsNewCount = cruiseTicketsCount - 1;
+            }
+
+            cruiseTicketsInput.value = cruiseTicketsNewCount;
+            calculateTotal();
+        }
+
+        function calculateTotal(){
+           const firstClassCount = getInputNumber('firstClass');
+           const economyClassCount = getInputNumber('economy');
+
+           const subTotal = firstClassCount * 150 + economyClassCount * 100;
+           document.getElementById('sub-total').innerText =  subTotal;
+
+           const tax = subTotal * 0.1;
+           document.getElementById('tax-amount').innerText = tax;
+
+           const grandTotal = tax + subTotal;
+           document.getElementById('grand-total').innerText = grandTotal;
+        }
+
+        function getInputNumber(ticket){
+            const economyClassInput = document.getElementById(ticket + '-count');
+            const economyClassCount = parseInt(economyClassInput.value);
+            return economyClassCount;
+        }
+
+        //Book Now Button Event Listener
+        document.getElementById('submitBtn').addEventListener('click', function(){
+           const firstClassInput = getInputNumber('firstClass');
+           const economyClassInput = getInputNumber('economy');
+            if(firstClassInput < 1 && economyClassInput < 1){
+                alert('Please, Select Your Seats Before Booking');
+            }
+            else{
+                document.getElementById('success').style.display = 'block';
+            }          
+        });
+    </script>
+</body>
+
+</html>
